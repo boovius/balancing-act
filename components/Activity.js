@@ -3,14 +3,17 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 
 export default function Activity ({title, data, increment, onPress}) {
-  console.log('title', title)
-  console.log('data', data)
   return (
     <View key={title} style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
-      </TouchableOpacity>
+      <View style={styles.topRow}>
+        <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.bottomRow}>
+
+      </View>
     </View>
   )
 }
@@ -20,12 +23,16 @@ const styles = StyleSheet.create({
     height: 100,
     borderBottomColor: 'gray',
     borderBottomWidth: 10,
-    flex: 1,
+    justifyContent: 'space-around',
+  },
+  topRow: {
     justifyContent: 'space-between',
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 25,
+  },
+  bottomRow: {
   },
   button: {
     backgroundColor: 'gray',
