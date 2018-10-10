@@ -3,8 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 
 export default function Activity ({title, data, increment, onPress}) {
+  console.log('data', data)
   return (
-    <View key={title} style={styles.row}>
+    <View style={styles.row}>
       <View style={styles.topRow}>
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity style={styles.button} onPress={onPress}>
@@ -12,7 +13,7 @@ export default function Activity ({title, data, increment, onPress}) {
         </TouchableOpacity>
       </View>
       <View style={styles.bottomRow}>
-
+        <Text>{data.slice(-1)[0]}</Text>
       </View>
     </View>
   )
