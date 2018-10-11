@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, AsyncStorage } from 'react-native';
 import Activity from './components/Activity'
 
 
@@ -8,17 +8,28 @@ export default class App extends React.Component {
     increment: 7,
     activities: [
       {
+        key: '1',
         title: 'yoga',
         data: [
           "2018-09-21T15:44:50.195Z"
         ]
       },
       {
+        key: '2',
         title: 'meditation',
         data: [
         ]
       }
     ]
+  }
+
+  componentWillMount() {
+    AsyncStorage.getItem('balancingAct').then((json)=> {
+      const data = JSON.parse(json)
+      this.setState({
+        ...data
+      })
+    })
   }
 
   doActivity(title) {
@@ -35,6 +46,9 @@ export default class App extends React.Component {
     })
     this.setState({
       activities: newActivities
+    }, () => {
+      const data = JSON.stringify(this.state)
+      AsyncStorage.setItem('balancingAct', data)
     })
   }
 
@@ -45,7 +59,6 @@ export default class App extends React.Component {
           data={this.state.activities}
           renderItem={({item})=>(
             <Activity 
-              key={item.title} 
               increment={this.state.increment} 
               onPress={()=>this.doActivity(item.title)} 
               {...item}
