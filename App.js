@@ -26,12 +26,16 @@ export default class App extends React.Component {
   }
 
   doActivity(title) {
-    const newActivities = this.state.activities
-    newActivities.map(activity => {
+    const newActivities = this.state.activities.map(activity => {
       if (activity.title !== title) return activity
-      const newActivity = activity
-      newActivity.data.push(new Date().toISOString())
-      return newActivity
+      const newData = [
+        ...activity.data,
+        new Date().toISOString()
+      ]
+      return {
+        ...activity,
+        data: newData
+      }
     })
     this.setState({
       activities: newActivities
@@ -39,7 +43,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.activities)
     return (
       <View style={styles.container}>
         <FlatList 

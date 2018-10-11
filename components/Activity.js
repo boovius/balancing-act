@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 
 export default function Activity ({title, data, increment, onPress}) {
-  console.log('data', data)
   return (
     <View style={styles.row}>
       <View style={styles.topRow}>
@@ -34,6 +33,8 @@ const styles = StyleSheet.create({
     paddingRight: 25,
   },
   bottomRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   button: {
     backgroundColor: 'gray',
