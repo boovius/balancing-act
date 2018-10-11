@@ -5,21 +5,17 @@ import Activity from './components/Activity'
 
 export default class App extends React.Component {
   state =  {
+    increment: 7,
     activities: [
       {
         title: 'yoga',
         data: [
-          1,
-          2,
-          3,
+          "2018-09-21T15:44:50.195Z"
         ]
       },
       {
         title: 'meditation',
         data: [
-          4,
-          5,
-          6,
         ]
       }
     ]
@@ -47,7 +43,14 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <FlatList 
           data={this.state.activities}
-          renderItem={({item})=><Activity key={item.title} onPress={()=>this.doActivity(item.title)} {...item}/>}
+          renderItem={({item})=>(
+            <Activity 
+              key={item.title} 
+              increment={this.state.increment} 
+              onPress={()=>this.doActivity(item.title)} 
+              {...item}
+              />
+          )}
         />
       </View>
     )

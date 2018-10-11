@@ -2,6 +2,34 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 
+function timesDone(data, daysAgo) {
+  if (data.length === 0) return 'None yet done'
+
+  const dateAgo = dateFromDaysAgoToday(daysAgo)
+  datesDoneInIncrement = data.filter((date) => { 
+    if (new Date(date) > dateAgo) return date
+  })
+
+  if (datesDoneInIncrement.length > 1) {
+    return `Done ${datesDoneInIncrement.length} times in last ${daysAgo} days`
+  } else if (datesDoneInIncrement.length > 0) {
+    return `Done once in last ${daysAgo} days`
+  } else {
+    return lastDone(data)
+  }
+}
+
+function lastDone(data) {
+  const d = new Date(data.slice(-1)[0])
+  const today = new Date()
+  const lastDone = Math.floor((today - d)/1000/60/60/24)
+  return `Last done ${lastDone} days ago`
+}
+
+function dateFromDaysAgoToday(daysAgo) {
+  return new Date(new Date().setDate(new Date().getDate()-daysAgo))
+}
+
 export default function Activity ({title, data, increment, onPress}) {
   return (
     <View style={styles.row}>
@@ -12,7 +40,7 @@ export default function Activity ({title, data, increment, onPress}) {
         </TouchableOpacity>
       </View>
       <View style={styles.bottomRow}>
-        <Text>{data.slice(-1)[0]}</Text>
+        <Text>{timesDone(data, increment)}</Text>
       </View>
     </View>
   )
