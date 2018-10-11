@@ -1,21 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, AsyncStorage } from 'react-native';
-import Activity from './components/Activity'
+import { View, AsyncStorage } from 'react-native';
+import { createStackNavigator } from 'react-navigation'
+import IncrementList from './components/IncrementList'
+import ActivityList from './components/ActivityList'
 
+
+const Stack = createStackNavigator({
+  IncrementList: {
+    screen: IncrementList
+  },
+  ActivityList: {
+    screen: ActivityList
+  }
+})
 
 export default class App extends React.Component {
   state =  {
-    increment: 7,
-    activities: [
+    currentIncrementIndex: 0,
+    increments: [
+      {
+        key: '0',
+        days: 7,
+        alias: 'One Week'
+      },
       {
         key: '1',
+        days: 10,
+        alias: 'Ten Days'
+      },
+      {
+        key: '2',
+        days: 30,
+        alias: 'One Month'
+      }
+    ],
+    activities: [
+      {
+        key: '0',
         title: 'yoga',
         data: [
           "2018-09-21T15:44:50.195Z"
         ]
       },
       {
-        key: '2',
+        key: '1',
         title: 'meditation',
         data: [
         ]
@@ -54,28 +82,9 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <FlatList 
-          data={this.state.activities}
-          renderItem={({item})=>(
-            <Activity 
-              increment={this.state.increment} 
-              onPress={()=>this.doActivity(item.title)} 
-              {...item}
-              />
-          )}
-        />
+      <View>
+        <Stack />
       </View>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-});

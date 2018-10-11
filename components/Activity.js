@@ -2,6 +2,33 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
 
+export default function Activity ({title, data, increment, onPress}) {
+  return (
+    <View style={styles.row}>
+      <View style={styles.topRow}>
+        <Text style={styles.title}>{title}</Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.bottomRow}>
+        <Text>{timesDone(data, increment)}</Text>
+      </View>
+    </View>
+  )
+}
+
+function dateFromDaysAgoToday(daysAgo) {
+  return new Date(new Date().setDate(new Date().getDate()-daysAgo))
+}
+
+function lastDone(data) {
+  const d = new Date(data.slice(-1)[0])
+  const today = new Date()
+  const lastDone = Math.floor((today - d)/1000/60/60/24)
+  return `Last done ${lastDone} days ago`
+}
+
 function timesDone(data, daysAgo) {
   if (data.length === 0) return 'None yet done'
 
@@ -17,33 +44,6 @@ function timesDone(data, daysAgo) {
   } else {
     return lastDone(data)
   }
-}
-
-function lastDone(data) {
-  const d = new Date(data.slice(-1)[0])
-  const today = new Date()
-  const lastDone = Math.floor((today - d)/1000/60/60/24)
-  return `Last done ${lastDone} days ago`
-}
-
-function dateFromDaysAgoToday(daysAgo) {
-  return new Date(new Date().setDate(new Date().getDate()-daysAgo))
-}
-
-export default function Activity ({title, data, increment, onPress}) {
-  return (
-    <View style={styles.row}>
-      <View style={styles.topRow}>
-        <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bottomRow}>
-        <Text>{timesDone(data, increment)}</Text>
-      </View>
-    </View>
-  )
 }
 
 const styles = StyleSheet.create({
