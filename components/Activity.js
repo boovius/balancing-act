@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
+import { connect } from 'react-redux'
+import { doActivity } from '../actions'
 
-export default function Activity ({title, data, increment, onPress}) {
+export function Activity ({title, data, increment, doThisActivity}) {
   return (
     <View style={styles.row}>
       <View style={styles.topRow}>
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
+        <TouchableOpacity style={styles.button} onPress={doThisActivity}>
           <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
         </TouchableOpacity>
       </View>
@@ -77,3 +79,13 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 })
+
+function mapDispatchToProps(dispatch, ownProps) {
+  const id = ownProps.id
+  const time = new Date().toISOString()
+  return {
+    doThisActivity: ()=>dispatch(doActivity(id, time))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Activity)

@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import Activity from './Activity'
+import { connect } from 'react-redux';
 
-export default function ActivityList ({activities, currentIncrement, doActivity}) {
+export function ActivityList ({activities, currentIncrement}) {
   return(
     <View style={styles.container}>
       <View>
@@ -10,10 +11,10 @@ export default function ActivityList ({activities, currentIncrement, doActivity}
       </View>
       <FlatList 
         data={activities}
+        keyExtractor={item => item.id}
         renderItem={({item})=>(
           <Activity 
             increment={currentIncrement.days} 
-            onPress={()=>doActivity(item.title)} 
             {...item}
             />
         )}
@@ -37,3 +38,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
+function mapStateToProps(state) {
+  console.log('state inc key', state.currentIncrementKey)
+  return {
+    activities: state.activities,
+    currentIncrement: state.increments.find(increment => increment.key === state.currentIncrementKey)
+  }
+}
+
+export default connect(mapStateToProps)(ActivityList)

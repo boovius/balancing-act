@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import Increment from './Increment'
+import { connect } from 'react-redux'
+import { setCurrentIncrement } from  '../actions'
 
-export default function IncrementList ({increments, onPress}) {
+export function IncrementList ({increments, navigation, dispatch}) {
   return (
       <View>
         <Text style={styles.title}>Increments</Text>
         <FlatList
           data={increments}
           renderItem={({ item })=>(
-            <Increment onPress={()=>{}} {...item}
+            <Increment 
+              onPress={()=>navigateToIncrement(navigation, dispatch, item.key)} 
+              {...item}
             />
           )}
         />
@@ -24,3 +28,16 @@ const styles = StyleSheet.create({
     marginTop: 30,
   }
 })
+
+function navigateToIncrement(navigation, dispatch, key) {
+  dispatch(setCurrentIncrement(key))
+  navigation.navigate('ActivityList')
+}
+
+function mapStateToProps(state) {
+  return {
+    increments: state.increments
+  }
+}
+
+export default connect(mapStateToProps)(IncrementList)
