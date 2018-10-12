@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation'
-import IncrementList from './components/IncrementList'
-import ActivityList from './components/ActivityList'
 import { store, persistor } from './configureStore'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
+import IncrementList from './components/IncrementList'
+import ActivityList from './components/ActivityList'
+import AddIncrement from './components/AddIncrement'
 
 
 const Stack = createStackNavigator({
@@ -14,6 +14,9 @@ const Stack = createStackNavigator({
   },
   ActivityList: {
     screen: ActivityList
+  },
+  AddIncrement: {
+    screen: AddIncrement
   }
 })
 

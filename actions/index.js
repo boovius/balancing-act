@@ -1,6 +1,7 @@
 export const DO_ACTIVITY = 'DO_ACTIVITY'
 export const ADD_ACTIVITY = 'ADD_ACTIVITY'
 export const ADD_INCREMENT = 'ADD_INCREMENT'
+export const DELETE_INCREMENT = 'DELETE_INCREMENT'
 export const SET_CURRENT_INCREMENT = 'SET_CURRENT_INCREMENT'
 export const SET_DEFAULT_INCREMENT = 'SET_DEFAULT_INCREMENT'
 
@@ -19,9 +20,16 @@ export function addIncrement(increment) {
   }
 }
 
-export function setCurrentIncrement(incrementKey) {
+export function deleteIncrement(id) {
+  return {
+    type: DELETE_INCREMENT,
+    id
+  }
+}
+
+export function setCurrentIncrement(incrementId) {
   return {
     type: SET_CURRENT_INCREMENT,
-    currentIncrementKey: incrementKey
+    currentIncrementId: incrementId
   }
 }

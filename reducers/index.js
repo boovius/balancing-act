@@ -1,4 +1,8 @@
-import { DO_ACTIVITY, ADD_INCREMENT, SET_CURRENT_INCREMENT  } from '../actions'
+import { 
+  DO_ACTIVITY, 
+  ADD_INCREMENT, 
+  DELETE_INCREMENT, 
+  SET_CURRENT_INCREMENT  } from '../actions'
 
 function activities(state = [], action) {
   switch(action.type) {
@@ -26,6 +30,8 @@ function increments(state=[], action) {
         ...state,
         action.increment
       ]
+    case DELETE_INCREMENT:
+      return state.filter(increment => increment.id !== action.id)
     default:
       return state
   }
@@ -43,10 +49,15 @@ export default function reducer(state = {}, action) {
         ...state,
         increments: increments(state.increments, action)
       }
+    case DELETE_INCREMENT:
+      return {
+        ...state,
+        increments: increments(state.increments, action)
+      }
     case SET_CURRENT_INCREMENT:
       return {
         ...state,
-        currentIncrementKey: action.currentIncrementKey
+        currentIncrementId: action.currentIncrementId
       }
     default:
       return state

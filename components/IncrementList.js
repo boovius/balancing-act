@@ -1,36 +1,48 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import Increment from './Increment'
 import { connect } from 'react-redux'
 import { setCurrentIncrement } from  '../actions'
 
 export function IncrementList ({increments, navigation, dispatch}) {
   return (
-      <View>
-        <Text style={styles.title}>Increments</Text>
+      <ScrollView>
+        <View style={styles.titleRow}>
+          <Text style={styles.titleText}>Increments</Text>
+        </View>
         <FlatList
           data={increments}
+          keyExtractor={item=>item.id}
           renderItem={({ item })=>(
             <Increment 
-              onPress={()=>navigateToIncrement(navigation, dispatch, item.key)} 
+              onPress={()=>navigateToIncrement(navigation, dispatch, item.id)} 
               {...item}
             />
           )}
         />
-      </View>
+        <View>
+          <TouchableOpacity onPress={()=>{navigation.navigate('AddIncrement')}}>
+            <Text>Add Increment</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  title: {
+  titleRow: {
+    marginTop: 30,
+    borderBottomColor: '#aaa',
+    borderBottomWidth: 1,
+  },
+  titleText: {
     fontSize: 24,
     textAlign: 'center',
-    marginTop: 30,
   }
 })
 
-function navigateToIncrement(navigation, dispatch, key) {
-  dispatch(setCurrentIncrement(key))
+function navigateToIncrement(navigation, dispatch, id) {
+  dispatch(setCurrentIncrement(id))
   navigation.navigate('ActivityList')
 }
 

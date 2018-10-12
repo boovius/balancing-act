@@ -11,34 +11,34 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const initialState = {
-  currentIncrementKey: '0',
+  currentIncrementId:  "2018-09-21T15:44:50.195Z",
   increments: [
     {
-      key: '0',
+      id:  "2018-09-22T15:44:50.195Z",
       days: 7,
       alias: 'One Week'
     },
     {
-      key: '1',
+      id:  "2018-09-23T15:44:50.195Z",
       days: 10,
       alias: 'Ten Days'
     },
     {
-      key: '2',
+      id:  "2018-09-24T15:44:50.195Z",
       days: 30,
       alias: 'One Month'
     }
   ],
   activities: [
     {
-      id: '0',
+      id:  "2018-09-25T15:44:50.195Z",
       title: 'yoga',
       data: [
         "2018-09-21T15:44:50.195Z"
       ]
     },
     {
-      id: '1',
+      id:  "2018-09-26T15:44:50.195Z",
       title: 'meditation',
       data: [
       ]

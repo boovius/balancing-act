@@ -1,15 +1,29 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'
+import Swipeout from 'react-native-swipeout'
+import { connect } from 'react-redux'
+import { deleteIncrement } from  '../actions'
 
-export default function Increment ({alias, onPress}) {
+export function Increment ({id,alias, onPress, dispatch}) {
+  const swipeoutBtns = [
+    {
+      text: 'Delete Increment',
+      onPress: ()=>{ dispatch(
+        deleteIncrement(id)
+      )}
+    }
+  ]
+
   return (
-    <View style={styles.row}>
-      <Text style={styles.alias}>{alias}</Text>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <FontAwesome style={{textAlign: 'center'}} name='check' size={30} />
-      </TouchableOpacity>
-    </View>
+    <Swipeout right={swipeoutBtns}>
+      <View style={styles.row}>
+        <Text style={styles.alias}>{alias}</Text>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <FontAwesome style={{textAlign: 'center'}} name='check' size={30} />
+        </TouchableOpacity>
+      </View>
+    </Swipeout>
   )
 }
 
@@ -35,3 +49,5 @@ const styles = StyleSheet.create({
     fontSize: 30
   }
 })
+
+export default connect()(Increment)

@@ -43,7 +43,7 @@ function mapStateToProps(state) {
   console.log('state inc key', state.currentIncrementKey)
   return {
     activities: state.activities,
-    currentIncrement: state.increments.find(increment => increment.key === state.currentIncrementKey)
+    currentIncrement: state.increments.find(increment => increment.id === state.currentIncrementId)
   }
 }
 
