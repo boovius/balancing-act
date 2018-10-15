@@ -49,3 +49,11 @@ export function setCurrentIncrement(incrementId) {
     currentIncrementId: incrementId
   }
 }
+
+export function deleteDoing(activityId, doing) {
+  return {
+    type: DELETE_DOING,
+    activityId,
+    doing
+  }
+}

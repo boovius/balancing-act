@@ -1,10 +1,12 @@
 import { 
   DO_ACTIVITY, 
+  ADD_ACTIVITY,
+  DELETE_ACTIVITY,
+  DELETE_DOING,
   ADD_INCREMENT, 
   DELETE_INCREMENT, 
-  SET_CURRENT_INCREMENT,  
-  ADD_ACTIVITY,
-  DELETE_ACTIVITY} from '../actions'
+  SET_CURRENT_INCREMENT
+  } from '../actions'
 
 export function activities(state = [], action) {
   switch(action.type) {
@@ -30,6 +32,15 @@ export function activities(state = [], action) {
       ]
     case DELETE_ACTIVITY:
       return state.filter(activity => activity.id !== action.id)
+    case DELETE_DOING:
+      return state.map(activity => {
+        if (activity.id !== action.activityId) return activity
+        const newData = activity.data.filter(doing => doing !== action.doing)
+        return {
+          ...activity,
+          data: newData
+        }
+      })
     default:
       return state
   }
