@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ListItem } from 'react-native-elements'
 import Swipeout from 'react-native-swipeout'
 import { connect } from 'react-redux'
 import { deleteIncrement } from  '../actions'
-import { ListItem } from 'react-native-elements'
+import { RemoveIncrementButton } from './RemoveButtons'
 
 export function IncrementListItem ({id, alias, onPress, dispatch}) {
   const swipeoutBtns = [
     {
-      text: 'Remove',
-      component: RemoveBtn,
+      component: RemoveIncrementButton,
       onPress: ()=>{ dispatch(
         deleteIncrement(id)
       )},
@@ -19,7 +19,7 @@ export function IncrementListItem ({id, alias, onPress, dispatch}) {
   ]
 
   return (
-    <Swipeout buttonWidth={100} right={swipeoutBtns}>
+    <Swipeout backgroundColor='#fff' buttonWidth={100} right={swipeoutBtns}>
       <ListItem
         title={alias}
         wrapperStyle={styles.row}
@@ -38,22 +38,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
-  removeBtn: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  removeBtnText: {
-    color: '#fff',
-    fontSize: 16
-  }
 })
-
-const RemoveBtn = (
-  <View style={styles.removeBtn}>
-    <Text style={styles.removeBtnText}>Remove</Text>
-    <Text style={styles.removeBtnText}>Increment</Text>
-  </View>
-)
 
 export default connect()(IncrementListItem)

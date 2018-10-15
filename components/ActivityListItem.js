@@ -1,20 +1,31 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
-import { doActivity } from '../actions'
+import Swipeout from 'react-native-swipeout'
 import { ListItem } from 'react-native-elements'
+import { doActivity, deleteActivity } from '../actions'
+import { RemoveActivityButton } from './RemoveButtons'
 
-export function ActivityListItem ({title, data, increment, doThisActivity}) {
+export function ActivityListItem ({ title, data, increment, doThisActivity, removeActivity}) {
+  const swipeoutBtns = [
+    {
+      component: RemoveActivityButton,
+      onPress: ()=>{ removeActivity()},
+      type: 'delete',
+      underlayColor: 'rgba(209,26,42,.9)',
+    }
+  ]
   return (
-    <View style={styles.row}>
+    <Swipeout backgroundColor='#fff' buttonWidth={100} right={swipeoutBtns}>
       <ListItem
         title={title}
+        containerStyle={styles.row}
         titleStyle={styles.title}
         subtitle={timesDone(data, increment)}
-        rightIcon={{name: 'plus', type: 'font-awesome'}}
+        rightIcon={{ name: 'plus', type: 'font-awesome' }}
         onPressRightIcon={doThisActivity}
       />
-    </View>
+    </Swipeout>
   )
 }
 
@@ -52,14 +63,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30
-  }
+  },
 })
 
 function mapDispatchToProps(dispatch, ownProps) {
   const id = ownProps.id
   const time = new Date().toISOString()
   return {
-    doThisActivity: ()=>dispatch(doActivity(id, time))
+    doThisActivity: ()=>dispatch(doActivity(id, time)),
+    removeActivity: ()=>dispatch(deleteActivity(id))
   }
 }
 

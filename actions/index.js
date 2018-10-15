@@ -1,5 +1,6 @@
 export const DO_ACTIVITY = 'DO_ACTIVITY'
 export const ADD_ACTIVITY = 'ADD_ACTIVITY'
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY'
 export const ADD_INCREMENT = 'ADD_INCREMENT'
 export const DELETE_INCREMENT = 'DELETE_INCREMENT'
 export const SET_CURRENT_INCREMENT = 'SET_CURRENT_INCREMENT'
@@ -17,6 +18,13 @@ export function addActivity (activity) {
   return {
     type: ADD_ACTIVITY,
     activity
+  }
+}
+
+export function deleteActivity (id) {
+  return {
+    type: DELETE_ACTIVITY,
+    id
   }
 }
 
