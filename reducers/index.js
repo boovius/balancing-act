@@ -6,7 +6,7 @@ import {
   ADD_ACTIVITY,
   DELETE_ACTIVITY} from '../actions'
 
-function activities(state = [], action) {
+export function activities(state = [], action) {
   switch(action.type) {
     case DO_ACTIVITY:
       return state.map(activity => {
@@ -35,7 +35,7 @@ function activities(state = [], action) {
   }
 }
 
-function increments(state=[], action) {
+export function increments(state=[], action) {
   switch(action.type) {
     case ADD_INCREMENT:
       return [
@@ -49,33 +49,8 @@ function increments(state=[], action) {
   }
 }
 
-export default function reducer(state = {}, action) {
+export function settings(state = {}, action) {
   switch(action.type) {
-    case DO_ACTIVITY:
-      return {
-        ...state,
-        activities: activities(state.activities, action)
-      }
-    case ADD_ACTIVITY:
-      return {
-        ...state,
-        activities: activities(state.activities, action)
-      }
-    case DELETE_ACTIVITY:
-      return {
-        ...state,
-        activities: activities(state.activities, action)
-      }
-    case ADD_INCREMENT:
-      return {
-        ...state,
-        increments: increments(state.increments, action)
-      }
-    case DELETE_INCREMENT:
-      return {
-        ...state,
-        increments: increments(state.increments, action)
-      }
     case SET_CURRENT_INCREMENT:
       return {
         ...state,

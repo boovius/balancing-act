@@ -30,14 +30,14 @@ const Stack = createStackNavigator({
   }
 })
 
+        //<PersistGate loader={null} persistor={persistor}>
+        //  <Stack />
+        //</PersistGate>
 export default class App extends React.Component {
-
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loader={null} persistor={persistor}>
-          <Stack />
-        </PersistGate>
+        <Stack />
       </Provider>
     )
   }

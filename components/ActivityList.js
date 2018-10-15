@@ -50,10 +50,9 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log('state inc key', state.currentIncrementKey)
   return {
     activities: state.activities,
-    currentIncrement: state.increments.find(increment => increment.id === state.currentIncrementId)
+    currentIncrement: state.increments.find(increment => increment.id === state.settings.currentIncrementId)
   }
 }
 
