@@ -1,28 +1,32 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'
+import { View, Text, StyleSheet } from 'react-native';
 import Swipeout from 'react-native-swipeout'
 import { connect } from 'react-redux'
 import { deleteIncrement } from  '../actions'
+import { ListItem } from 'react-native-elements'
 
-export function Increment ({id,alias, onPress, dispatch}) {
+export function Increment ({id, alias, onPress, dispatch}) {
   const swipeoutBtns = [
     {
-      text: 'Delete Increment',
+      text: 'Remove',
+      component: RemoveBtn,
       onPress: ()=>{ dispatch(
         deleteIncrement(id)
-      )}
+      )},
+      type: 'delete',
+      underlayColor: 'rgba(209,26,42,.9)',
     }
   ]
 
   return (
-    <Swipeout right={swipeoutBtns}>
-      <View style={styles.row}>
-        <Text style={styles.alias}>{alias}</Text>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <FontAwesome style={{textAlign: 'center'}} name='check' size={30} />
-        </TouchableOpacity>
-      </View>
+    <Swipeout buttonWidth={100} right={swipeoutBtns}>
+      <ListItem
+        title={alias}
+        wrapperStyle={styles.row}
+        onPress={onPress}
+        titleStyle={styles.title}
+        underlayColor='blue'
+      />
     </Swipeout>
   )
 }
@@ -30,24 +34,26 @@ export function Increment ({id,alias, onPress, dispatch}) {
 const styles = StyleSheet.create({
   row: {
     height: 100,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 10,
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    alignItems: 'center',
   },
-  button: {
-    backgroundColor: 'gray',
-    height: 50,
-    width: 50,
-    borderRadius: 20,
-    flexDirection: 'row',
+  title: {
+    fontSize: 24,
+  },
+  removeBtn: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  alias: {
-    fontSize: 30
+  removeBtnText: {
+    color: '#fff',
+    fontSize: 16
   }
 })
+
+const RemoveBtn = (
+  <View style={styles.removeBtn}>
+    <Text style={styles.removeBtnText}>Remove</Text>
+    <Text style={styles.removeBtnText}>Increment</Text>
+  </View>
+)
 
 export default connect()(Increment)
