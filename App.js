@@ -10,10 +10,16 @@ import AddIncrement from './components/AddIncrement'
 
 const Stack = createStackNavigator({
   IncrementList: {
-    screen: IncrementList
+    screen: IncrementList,
+    navigationOptions: {
+      title: 'Increments'
+    }
   },
   ActivityList: {
-    screen: ActivityList
+    screen: ActivityList,
+    navigationOptions: {
+      title: 'Activities'
+    }
   },
   AddIncrement: {
     screen: AddIncrement

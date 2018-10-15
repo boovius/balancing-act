@@ -9,9 +9,6 @@ export function IncrementList ({increments, navigation, dispatch}) {
   return (
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.titleRow}>
-            <Text style={styles.titleText}>Increments</Text>
-          </View>
           <FlatList
             data={increments}
             keyExtractor={item=>item.id}
@@ -40,14 +37,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 10,
     paddingBottom: 10,
-  },
-  titleRow: {
-    borderBottomColor: '#aaa',
-    borderBottomWidth: 1,
-  },
-  titleText: {
-    fontSize: 24,
-    textAlign: 'center',
   },
 })
 

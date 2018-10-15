@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { addIncrement } from '../actions'
+import { FormInput, FormLabel, Button } from 'react-native-elements'
+
 
 export class AddIncrement extends Component {
+  static navigationOptions = {
+    title: 'Add Increment',
+    headerStyle: {
+      backgroundColor: '#e2c544',
+    },
+  }
+
   state = {
     days: null,
     alias: ''
@@ -22,28 +31,41 @@ export class AddIncrement extends Component {
 
   render() {
     return (
-      <View>
-        <Text style={styles.title}>Add Increment</Text>
-        <TextInput 
-          keyboardType='numeric'
-          value={this.state.days}
-          placeholder='days' 
-          onChangeText={(days)=>this.setState({days})}
-          style={styles.numberInput}
-        />
-        <TextInput 
-          value={this.state.alias}
-          placeholder='days' 
-          onChangeText={(alias)=>this.setState({alias})}
-          style={styles.nameInput}
-        />
-        <TouchableOpacity onPress={this.submit}><Text>Submit</Text></TouchableOpacity>
+      <View style={styles.container}>
+        <View>
+          <FormLabel>How many days?</FormLabel>
+          <FormInput 
+            keyboardType='numeric'
+            placeholder='7' 
+            onChangeText={(days)=>this.setState({days})}
+          />
+          <FormLabel>What you want to call it</FormLabel>
+          <FormInput 
+            placeholder='One Week' 
+            onChangeText={(days)=>this.setState({days})}
+          />
+        </View>
+        <TouchableOpacity style={styles.addIncrement}>
+          <Button 
+            onPress={this.submit}
+            rightIcon={{name: 'plus', type: 'font-awesome'}}
+            title="Add Increment"
+            backgroundColor='#e2c544'
+            color='#000'
+            raised
+          />
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+    paddingBottom: 15,
+  },
   title: {
     fontSize: 30
   },
