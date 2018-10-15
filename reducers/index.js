@@ -2,7 +2,8 @@ import {
   DO_ACTIVITY, 
   ADD_INCREMENT, 
   DELETE_INCREMENT, 
-  SET_CURRENT_INCREMENT  } from '../actions'
+  SET_CURRENT_INCREMENT,  
+  ADD_ACTIVITY} from '../actions'
 
 function activities(state = [], action) {
   switch(action.type) {
@@ -18,6 +19,14 @@ function activities(state = [], action) {
           data: newData
         }
       })
+    case ADD_ACTIVITY:
+      return [
+        ...state,
+        {
+          ...action.activity,
+          data: []
+        }
+      ]
     default:
       return state
   }
@@ -40,6 +49,11 @@ function increments(state=[], action) {
 export default function reducer(state = {}, action) {
   switch(action.type) {
     case DO_ACTIVITY:
+      return {
+        ...state,
+        activities: activities(state.activities, action)
+      }
+    case ADD_ACTIVITY:
       return {
         ...state,
         activities: activities(state.activities, action)

@@ -1,24 +1,34 @@
 import React from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import Activity from './Activity'
+import { StyleSheet, Text, View, FlatList, ScrollView, TouchableOpacity } from 'react-native';
+import ActivityListItem from './ActivityListItem'
 import { connect } from 'react-redux';
+import { Button } from 'react-native-elements'
 
-export function ActivityList ({activities, currentIncrement}) {
+export function ActivityList ({activities, currentIncrement, navigation}) {
   return(
     <View style={styles.container}>
       <View>
         <Text style={styles.title}>{currentIncrement.alias}</Text>
       </View>
-      <FlatList 
-        data={activities}
-        keyExtractor={item => item.id}
-        renderItem={({item})=>(
-          <Activity 
-            increment={currentIncrement.days} 
-            {...item}
-            />
-        )}
-      />
+      <ScrollView>
+        <FlatList 
+          data={activities}
+          keyExtractor={item => item.id}
+          renderItem={({item})=>(
+            <ActivityListItem 
+              increment={currentIncrement.days} 
+              {...item}
+              />
+          )}
+        />
+      </ScrollView>
+      <TouchableOpacity>
+        <Button
+          onPress={() => { navigation.navigate('AddActivity') }}
+          rightIcon={{ name: 'plus', type: 'font-awesome' }}
+          title="Add Activity"
+        />
+      </TouchableOpacity>
     </View>
   )
 }
@@ -26,10 +36,10 @@ export function ActivityList ({activities, currentIncrement}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
     backgroundColor: '#fff',
     alignItems: 'stretch',
     justifyContent: 'center',
+    paddingBottom: 20,
   },
   title: {
     fontSize: 30,

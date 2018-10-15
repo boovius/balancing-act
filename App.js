@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import IncrementList from './components/IncrementList'
 import ActivityList from './components/ActivityList'
 import AddIncrement from './components/AddIncrement'
+import AddActivity from './components/AddActivity'
 
 
 const Stack = createStackNavigator({
@@ -23,6 +24,9 @@ const Stack = createStackNavigator({
   },
   AddIncrement: {
     screen: AddIncrement
+  },
+  AddActivity: {
+    screen: AddActivity
   }
 })
 

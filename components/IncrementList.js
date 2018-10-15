@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
-import Increment from './Increment'
+import { ScrollView, View, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import IncrementListItem from './IncrementListItem'
 import { connect } from 'react-redux'
 import { setCurrentIncrement } from  '../actions'
 import { Button } from 'react-native-elements'
@@ -13,7 +13,7 @@ export function IncrementList ({increments, navigation, dispatch}) {
             data={increments}
             keyExtractor={item=>item.id}
             renderItem={({ item })=>(
-              <Increment 
+              <IncrementListItem
                 onPress={()=>navigateToIncrement(navigation, dispatch, item.id)} 
                 {...item}
               />

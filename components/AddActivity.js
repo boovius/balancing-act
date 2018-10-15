@@ -1,57 +1,49 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { addIncrement } from '../actions'
+import { addActivity } from '../actions'
 import { FormInput, FormLabel, Button } from 'react-native-elements'
-import { anzac } from '../colors'
+import { havelockBlue } from '../colors'
 
 
-export class AddIncrement extends Component {
+export class AddActivity extends Component {
   static navigationOptions = {
-    title: 'Add Increment',
+    title: 'Add Activity',
     headerStyle: {
-      backgroundColor: anzac,
+      backgroundColor: havelockBlue,
     },
   }
 
   state = {
-    days: null,
-    alias: ''
+    title: ''
   }
 
   submit = () => {
     this.props.dispatch(
-      addIncrement({
-        ...this.state,
-        days: parseInt(this.state.days),
+      addActivity({
+        title: this.state.title,
         id: new Date().toISOString()
       })
     )
-    this.props.navigation.navigate('IncrementList')
+    this.props.navigation.navigate('ActivityList')
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View>
-          <FormLabel>How many days?</FormLabel>
+          <FormLabel>Activity Name</FormLabel>
           <FormInput 
-            keyboardType='numeric'
-            placeholder='7' 
-            onChangeText={(days)=>this.setState({days})}
-          />
-          <FormLabel>What you want to call it</FormLabel>
-          <FormInput 
-            placeholder='One Week' 
-            onChangeText={(days)=>this.setState({days})}
+            placeholder='Exercise' 
+            onChangeText={(title)=>this.setState({title})}
           />
         </View>
-        <TouchableOpacity style={styles.addIncrement}>
+        <TouchableOpacity style={styles.addActivity}>
           <Button 
             onPress={this.submit}
             rightIcon={{name: 'plus', type: 'font-awesome'}}
-            title="Add Increment"
-            backgroundColor={anzac}
+            title="Add Activity"
+            backgroundColor={havelockBlue}
             color='#000'
             raised
           />
@@ -79,4 +71,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default connect()(AddIncrement)
+export default connect()(AddActivity)

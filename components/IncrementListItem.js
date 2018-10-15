@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { deleteIncrement } from  '../actions'
 import { ListItem } from 'react-native-elements'
 
-export function Increment ({id, alias, onPress, dispatch}) {
+export function IncrementListItem ({id, alias, onPress, dispatch}) {
   const swipeoutBtns = [
     {
       text: 'Remove',
@@ -25,7 +25,7 @@ export function Increment ({id, alias, onPress, dispatch}) {
         wrapperStyle={styles.row}
         onPress={onPress}
         titleStyle={styles.title}
-        underlayColor='blue'
+        underlayColor='rgba(249,249,249,.9)'
       />
     </Swipeout>
   )
@@ -56,4 +56,4 @@ const RemoveBtn = (
   </View>
 )
 
-export default connect()(Increment)
+export default connect()(IncrementListItem)

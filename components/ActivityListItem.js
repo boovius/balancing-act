@@ -1,21 +1,19 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons'
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
 import { doActivity } from '../actions'
+import { ListItem } from 'react-native-elements'
 
-export function Activity ({title, data, increment, doThisActivity}) {
+export function ActivityListItem ({title, data, increment, doThisActivity}) {
   return (
     <View style={styles.row}>
-      <View style={styles.topRow}>
-        <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity style={styles.button} onPress={doThisActivity}>
-          <FontAwesome style={{textAlign: 'center'}} name='plus' size={30} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bottomRow}>
-        <Text>{timesDone(data, increment)}</Text>
-      </View>
+      <ListItem
+        title={title}
+        titleStyle={styles.title}
+        subtitle={timesDone(data, increment)}
+        rightIcon={{name: 'plus', type: 'font-awesome'}}
+        onPressRightIcon={doThisActivity}
+      />
     </View>
   )
 }
@@ -51,29 +49,6 @@ function timesDone(data, daysAgo) {
 const styles = StyleSheet.create({
   row: {
     height: 100,
-    borderBottomColor: 'gray',
-    borderBottomWidth: 10,
-    justifyContent: 'space-around',
-  },
-  topRow: {
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 15,
-    paddingRight: 25,
-  },
-  bottomRow: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'gray',
-    height: 50,
-    width: 50,
-    borderRadius: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   title: {
     fontSize: 30
@@ -88,4 +63,4 @@ function mapDispatchToProps(dispatch, ownProps) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Activity)
+export default connect(null, mapDispatchToProps)(ActivityListItem)

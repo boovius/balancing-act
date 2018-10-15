@@ -13,6 +13,13 @@ export function doActivity (id, time) {
   }
 }
 
+export function addActivity (activity) {
+  return {
+    type: ADD_ACTIVITY,
+    activity
+  }
+}
+
 export function addIncrement(increment) {
   return {
     type: ADD_INCREMENT,
