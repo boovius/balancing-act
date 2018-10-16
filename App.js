@@ -8,6 +8,7 @@ import ActivityList from './components/ActivityList'
 import AddIncrement from './components/AddIncrement'
 import AddActivity from './components/AddActivity'
 import DoingsList from './components/DoingsList'
+import IncrementSettings from './components/IncrementSettings'
 
 
 const Stack = createStackNavigator({
@@ -31,12 +32,12 @@ const Stack = createStackNavigator({
   },
   DoingsList: {
     screen: DoingsList
-  }
+  },
+  IncrementSettings: {
+    screen: IncrementSettings
+  },
 })
 
-        //<PersistGate loader={null} persistor={persistor}>
-        //  <Stack />
-        //</PersistGate>
 export default class App extends React.Component {
   render() {
     return (
@@ -46,3 +47,6 @@ export default class App extends React.Component {
     )
   }
 }
+        //j<PersistGate loader={null} persistor={persistor}>
+        //j  <Stack />
+        //j</PersistGate>

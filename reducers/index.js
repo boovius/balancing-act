@@ -5,7 +5,8 @@ import {
   DELETE_DOING,
   ADD_INCREMENT, 
   DELETE_INCREMENT, 
-  SET_CURRENT_INCREMENT
+  SET_CURRENT_INCREMENT,
+  SET_DEFAULT_INCREMENT
   } from '../actions'
 
 export function activities(state = [], action) {
@@ -60,12 +61,17 @@ export function increments(state=[], action) {
   }
 }
 
-export function settings(state = {}, action) {
+export function settings(state = {defaultIncrementId: null}, action) {
   switch(action.type) {
     case SET_CURRENT_INCREMENT:
       return {
         ...state,
         currentIncrementId: action.currentIncrementId
+      }
+    case SET_DEFAULT_INCREMENT:
+      return {
+        ...state,
+        defaultIncrementId: action.incrementId
       }
     default:
       return state

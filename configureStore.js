@@ -14,6 +14,7 @@ const rootReducer = combineReducers({settings, activities, increments})
 const initialState = {
   settings: {
     currentIncrementId:  "2018-09-21T15:44:50.195Z",
+    defaultIncrementId: "2018-09-22T15:44:50.195Z",
   },
   increments: [
     {

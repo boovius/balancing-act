@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { ListItem } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements'
 import Swipeout from 'react-native-swipeout'
 import { connect } from 'react-redux'
 import { deleteIncrement } from  '../actions'
 import { RemoveIncrementButton } from './RemoveButtons'
 
-export function IncrementListItem ({id, alias, onPress, dispatch}) {
+export function IncrementListItem ({id, alias, onPress, dispatch, navigation}) {
   const swipeoutBtns = [
     {
       component: RemoveIncrementButton,
@@ -26,6 +26,13 @@ export function IncrementListItem ({id, alias, onPress, dispatch}) {
         onPress={onPress}
         titleStyle={styles.title}
         underlayColor='rgba(249,249,249,.9)'
+        leftIcon={
+          <Icon 
+            name='settings'
+            type='feather'
+            onPress={()=>navigation.navigate('IncrementSettings', {incrementId: id})}
+          />
+        }
       />
     </Swipeout>
   )

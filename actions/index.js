@@ -29,6 +29,14 @@ export function deleteActivity (id) {
   }
 }
 
+export function deleteDoing(activityId, doing) {
+  return {
+    type: DELETE_DOING,
+    activityId,
+    doing
+  }
+}
+
 export function addIncrement(increment) {
   return {
     type: ADD_INCREMENT,
@@ -50,10 +58,9 @@ export function setCurrentIncrement(incrementId) {
   }
 }
 
-export function deleteDoing(activityId, doing) {
+export function setDefaultIncrement(incrementId) {
   return {
-    type: DELETE_DOING,
-    activityId,
-    doing
+    type: SET_DEFAULT_INCREMENT,
+    defautlIncrementId: incrementId
   }
 }

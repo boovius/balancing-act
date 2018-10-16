@@ -5,7 +5,10 @@ import { connect } from 'react-redux'
 import { setCurrentIncrement } from  '../actions'
 import { Button } from 'react-native-elements'
 
-export function IncrementList ({increments, navigation, dispatch}) {
+export function IncrementList ({increments, navigation, dispatch, defaultIncrementId}) {
+  if (defaultIncrementId !== null) {
+    navigateToIncrement(navigation, dispatch, defaultIncrementId)
+  }
   return (
       <View style={styles.container}>
         <ScrollView>
@@ -16,6 +19,7 @@ export function IncrementList ({increments, navigation, dispatch}) {
               <IncrementListItem
                 onPress={()=>navigateToIncrement(navigation, dispatch, item.id)} 
                 {...item}
+                navigation={navigation}
               />
             )}
           />
@@ -47,7 +51,8 @@ function navigateToIncrement(navigation, dispatch, id) {
 
 function mapStateToProps(state) {
   return {
-    increments: state.increments
+    increments: state.increments,
+    defaultIncrementId: state.settings.defaultIncrementId,
   }
 }
 

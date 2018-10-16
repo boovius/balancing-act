@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import Swipeout from 'react-native-swipeout'
 import { ListItem } from 'react-native-elements'
@@ -17,15 +17,17 @@ export function ActivityListItem ({id, title, data, increment, doThisActivity, r
   ]
   return (
     <Swipeout backgroundColor='#fff' buttonWidth={100} right={swipeoutBtns}>
-      <ListItem
-        title={title}
-        containerStyle={styles.row}
-        titleStyle={styles.title}
-        subtitle={timesDone(data, increment)}
-        rightIcon={{ name: 'plus', type: 'font-awesome' }}
-        onPressRightIcon={doThisActivity}
-        onPress={()=>navigation.navigate('DoingsList', {activityId: id})}
-      />
+      <TouchableOpacity>
+        <ListItem
+          title={title}
+          containerStyle={styles.row}
+          titleStyle={styles.title}
+          subtitle={timesDone(data, increment)}
+          rightIcon={{ name: 'plus', type: 'font-awesome' }}
+          onPressRightIcon={doThisActivity}
+          onPress={() => navigation.navigate('DoingsList', { activityId: id })}
+        />
+      </TouchableOpacity>
     </Swipeout>
   )
 }
