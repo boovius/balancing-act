@@ -66,7 +66,7 @@ export function settings(state = {defaultIncrementId: null}, action) {
     case SET_CURRENT_INCREMENT:
       return {
         ...state,
-        currentIncrementId: action.currentIncrementId
+        currentIncrementId: action.incrementId
       }
     case SET_DEFAULT_INCREMENT:
       return {

@@ -9,7 +9,7 @@ const persistConfig = {
   storage,
 }
 const rootReducer = combineReducers({settings, activities, increments})
-//const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const initialState = {
   settings: {
@@ -50,6 +50,6 @@ const initialState = {
   ]
 }
 
-export const store = createStore(rootReducer, initialState, applyMiddleware(logger))
-//export const store = createStore(persistedReducer, initialState, applyMiddleware(logger))
+//export const store = createStore(rootReducer, initialState, applyMiddleware(logger))
+export const store = createStore(persistedReducer, initialState, applyMiddleware(logger))
 export const persistor = persistStore(store)

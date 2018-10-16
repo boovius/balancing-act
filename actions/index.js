@@ -54,13 +54,13 @@ export function deleteIncrement(id) {
 export function setCurrentIncrement(incrementId) {
   return {
     type: SET_CURRENT_INCREMENT,
-    currentIncrementId: incrementId
+    incrementId
   }
 }
 
 export function setDefaultIncrement(incrementId) {
   return {
     type: SET_DEFAULT_INCREMENT,
-    defautlIncrementId: incrementId
+    incrementId
   }
 }

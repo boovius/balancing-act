@@ -7,11 +7,13 @@ import { anzac } from '../colors'
 
 
 export class AddIncrement extends Component {
-  static navigationOptions = {
-    title: 'Add Increment',
-    headerStyle: {
-      backgroundColor: anzac,
-    },
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: 'Add Increment',
+      headerStyle: {
+        backgroundColor: anzac,
+      },
+    }
   }
 
   state = {

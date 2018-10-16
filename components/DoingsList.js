@@ -46,7 +46,7 @@ export class DoingsList extends Component {
                 key={doing} 
                 title={date} 
                 rightIcon={
-                  <FadeInView duration={1000}>
+                  <FadeInView duration={500}>
                     <Icon 
                       name='remove'
                       type='font-awesome'

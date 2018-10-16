@@ -6,7 +6,7 @@ import { setCurrentIncrement } from  '../actions'
 import { Button } from 'react-native-elements'
 
 export function IncrementList ({increments, navigation, dispatch, defaultIncrementId}) {
-  if (defaultIncrementId !== null) {
+  if (typeof defaultIncrementId !== 'undefined' && defaultIncrementId !== null) {
     navigateToIncrement(navigation, dispatch, defaultIncrementId)
   }
   return (

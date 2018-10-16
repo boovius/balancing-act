@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
 import Swipeout from 'react-native-swipeout'
 import { connect } from 'react-redux'
@@ -26,13 +26,20 @@ export function IncrementListItem ({id, alias, onPress, dispatch, navigation}) {
         onPress={onPress}
         titleStyle={styles.title}
         underlayColor='rgba(249,249,249,.9)'
-        leftIcon={
-          <Icon 
-            name='settings'
-            type='feather'
-            onPress={()=>navigation.navigate('IncrementSettings', {incrementId: id})}
-          />
+        subtitle={
+          <TouchableOpacity 
+            onPress={()=>navigation.navigate('IncrementSettings', {incrementId: id, incrementAlias: alias})}
+            style={styles.settings}
+          >
+            <Icon 
+              name='settings'
+              type='feather'
+              size={18}
+              color='#afafae'
+            />
+          </TouchableOpacity>
         }
+        subtitleContainerStyle={styles.settings}
       />
     </Swipeout>
   )
@@ -45,6 +52,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
   },
+  settings: {
+    marginTop: 10,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    paddingLeft: 6,
+  }
 })
 
 export default connect()(IncrementListItem)

@@ -42,11 +42,10 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Stack />
+        <PersistGate loader={null} persistor={persistor}>
+          <Stack />
+        </PersistGate>
       </Provider>
     )
   }
 }
-        //j<PersistGate loader={null} persistor={persistor}>
-        //j  <Stack />
-        //j</PersistGate>
