@@ -26,10 +26,3 @@ export const RemoveActivityButton = (
     <Text style={styles.removeBtnText}>Activity</Text>
   </View>
 )
-
-export const RemoveActivityButton = (
-  <View style={styles.removeBtn}>
-    <Text style={styles.removeBtnText}>Remove</Text>
-    <Text style={styles.removeBtnText}>Time Done</Text>
-  </View>
-)
