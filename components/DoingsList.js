@@ -3,11 +3,12 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-nati
 import { connect } from 'react-redux';
 import { List, ListItem, Icon } from 'react-native-elements'
 import { deleteDoing } from '../actions'
+import FadeInView from 'react-native-fade-in-view'
 
 
 export class DoingsList extends Component {
   state = {
-    editing: false
+    editing: false,
   }
 
   toggleEditingMode = () => {
@@ -38,18 +39,21 @@ export class DoingsList extends Component {
         <ScrollView>
           <List>
             {activity.data.map((doing) =>{
+              const date = new Date(doing).toLocaleString()
               return !this.state.editing ? 
-              <ListItem key={doing} title={doing} hideChevron /> :
+              <ListItem key={doing} title={date} hideChevron /> :
               <ListItem 
                 key={doing} 
-                title={doing} 
+                title={date} 
                 rightIcon={
-                  <Icon 
-                    name='remove'
-                    type='font-awesome'
-                    color='red'
-                    onPress={()=>this.removeDoing(doing)} 
-                  />
+                  <FadeInView duration={1000}>
+                    <Icon 
+                      name='remove'
+                      type='font-awesome'
+                      color='red'
+                      onPress={()=>this.removeDoing(doing)} 
+                    />  
+                  </FadeInView>
                 }
               />
             })}
