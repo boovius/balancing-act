@@ -18,6 +18,7 @@ export function ActivityList ({activities, currentIncrement, navigation}) {
             <ActivityListItem 
               increment={currentIncrement.days} 
               {...item}
+              navigation={navigation}
               />
           )}
         />

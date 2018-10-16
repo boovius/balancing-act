@@ -6,7 +6,7 @@ import { ListItem } from 'react-native-elements'
 import { doActivity, deleteActivity } from '../actions'
 import { RemoveActivityButton } from './RemoveButtons'
 
-export function ActivityListItem ({ title, data, increment, doThisActivity, removeActivity}) {
+export function ActivityListItem ({id, title, data, increment, doThisActivity, removeActivity, navigation}) {
   const swipeoutBtns = [
     {
       component: RemoveActivityButton,
@@ -24,6 +24,7 @@ export function ActivityListItem ({ title, data, increment, doThisActivity, remo
         subtitle={timesDone(data, increment)}
         rightIcon={{ name: 'plus', type: 'font-awesome' }}
         onPressRightIcon={doThisActivity}
+        onPress={()=>navigation.navigate('DoingsList', {activityId: id})}
       />
     </Swipeout>
   )

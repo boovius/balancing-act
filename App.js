@@ -7,6 +7,7 @@ import IncrementList from './components/IncrementList'
 import ActivityList from './components/ActivityList'
 import AddIncrement from './components/AddIncrement'
 import AddActivity from './components/AddActivity'
+import DoingsList from './components/DoingsList'
 
 
 const Stack = createStackNavigator({
@@ -27,6 +28,9 @@ const Stack = createStackNavigator({
   },
   AddActivity: {
     screen: AddActivity
+  },
+  DoingsList: {
+    screen: DoingsList
   }
 })
 
