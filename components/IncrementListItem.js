@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   settings: {
-    marginTop: 10,
+    marginTop: 5,
     justifyContent: 'flex-start',
     flexDirection: 'row',
     paddingLeft: 6,

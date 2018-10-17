@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Switch, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { setDefaultIncrement } from '../actions'
+import { osloGray, silverChalice } from '../colors'
 
 export class IncrementSettings extends Component {
   static navigationOptions = ({navigation}) => {
@@ -27,7 +28,7 @@ export class IncrementSettings extends Component {
     return (
       <View>
         <View style={styles.setDefault}>
-          <Text>Make Default</Text>
+          <Text style={styles.default}>Make Default</Text>
           <Switch onValueChange={this.toggleDefault} value={isDefault} />
         </View>
       </View>
@@ -39,8 +40,18 @@ const styles = StyleSheet.create({
   setDefault: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
+    backgroundColor: '#fff',
+    height: 100,
+    borderBottomColor: silverChalice,
+    borderTopColor: silverChalice,
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+  },
+  default: {
+    color: osloGray,
   }
 })
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { List, ListItem, Icon } from 'react-native-elements'
-import { deleteDoing } from '../actions'
+import { List, ListItem, Icon, Button } from 'react-native-elements'
+import { deleteActivity, deleteDoing } from '../actions'
 import FadeInView from 'react-native-fade-in-view'
+import { osloGray } from '../colors'
 
 
 export class DoingsList extends Component {
@@ -29,11 +30,29 @@ export class DoingsList extends Component {
     )
   }
 
+  deleteThisActivity = () => {
+    Alert.alert(
+      'Are you sure?',
+      'This will delete all data for this activity for good',
+      [
+        {text: 'Yes delete', onPress: () => {
+          this.props.navigation.pop()
+          this.props.dispatch(
+            deleteActivity(this.props.activity.id)
+          )
+        }},
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: false }
+    )
+  }
+
   render() {
     const { activity } = this.props
     return(
       <View style={styles.container}>
         <View style={styles.titleRow}>
+          <Text style={styles.title}>Dates done</Text>
           <TouchableOpacity onPress={this.toggleEditingMode}>
             <Icon 
               name='edit' 
@@ -64,6 +83,11 @@ export class DoingsList extends Component {
             })}
           </List>
         </ScrollView>
+        <Button
+          title='Delete This Activity'
+          backgroundColor='red'
+          onPress={this.deleteThisActivity}
+        />
       </View>
     )
   }
@@ -79,13 +103,14 @@ const styles = StyleSheet.create({
   },
   titleRow: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,
   },
   title: {
-    fontSize: 30,
+    color: osloGray,
+    fontSize: 18,
     textAlign: 'center',
     marginTop: 10,
     marginBottom: 10,
