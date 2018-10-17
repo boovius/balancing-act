@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import Swipeout from 'react-native-swipeout'
-import { ListItem } from 'react-native-elements'
+import { ListItem, Icon } from 'react-native-elements'
 import { doActivity, deleteActivity } from '../actions'
 import { RemoveActivityButton } from './RemoveButtons'
 
@@ -15,19 +15,34 @@ export function ActivityListItem ({id, title, data, increment, doThisActivity, r
       underlayColor: 'rgba(209,26,42,.9)',
     }
   ]
-  return (
-    <Swipeout backgroundColor='#fff' buttonWidth={100} right={swipeoutBtns}>
+
+  const listItemTitle = (
+    <View style={styles.titleRow}>
+      <Text style={styles.title}>{title}</Text>
       <TouchableOpacity>
-        <ListItem
-          title={title}
-          containerStyle={styles.row}
-          titleStyle={styles.title}
-          subtitle={timesDone(data, increment)}
-          rightIcon={{ name: 'plus', type: 'font-awesome' }}
-          onPressRightIcon={doThisActivity}
+        <Icon
+          containerStyle={styles.infoIconContainer}
+          iconStyle={styles.infoIcon}
+          name='info-circle'
+          type='font-awesome'
+          reverse
+          underlayColor='#aeaeae'
           onPress={() => navigation.navigate('DoingsList', { activityId: id })}
         />
       </TouchableOpacity>
+    </View>
+  )
+
+  return (
+    <Swipeout backgroundColor='#fff' buttonWidth={100} right={swipeoutBtns}>
+      <ListItem
+        title={listItemTitle}
+        containerStyle={styles.row}
+        titleStyle={styles.title}
+        subtitle={timesDone(data, increment)}
+        rightIcon={{ name: 'plus', type: 'font-awesome' }}
+        onPressRightIcon={doThisActivity}
+      />
     </Swipeout>
   )
 }
@@ -64,9 +79,26 @@ const styles = StyleSheet.create({
   row: {
     height: 100,
   },
-  title: {
-    fontSize: 30
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
+  title: {
+    fontSize: 30,
+    marginLeft: 15,
+  },
+  infoIconContainer: {
+    marginLeft: 15,
+    backgroundColor: 'transparent',
+    borderColor: 'gray',
+    borderWidth: 1,
+    height: 25,
+    width: 25,
+  },
+  infoIcon: {
+    fontSize: 14,
+    color: 'gray'
+  }
 })
 
 function mapDispatchToProps(dispatch, ownProps) {
