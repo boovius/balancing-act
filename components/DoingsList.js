@@ -7,6 +7,12 @@ import FadeInView from 'react-native-fade-in-view'
 
 
 export class DoingsList extends Component {
+  static navigationOptions = ({navigation}) => {
+    return {
+      title: navigation.state.params.activityTitle,
+    }
+  }
+
   state = {
     editing: false,
   }
@@ -28,7 +34,6 @@ export class DoingsList extends Component {
     return(
       <View style={styles.container}>
         <View style={styles.titleRow}>
-          <Text style={styles.title}>{activity.title}</Text>
           <TouchableOpacity onPress={this.toggleEditingMode}>
             <Icon 
               name='edit' 
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
   },
   titleRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     paddingLeft: 15,
     paddingRight: 15,

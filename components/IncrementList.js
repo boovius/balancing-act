@@ -7,7 +7,8 @@ import { Button } from 'react-native-elements'
 
 export function IncrementList ({increments, navigation, dispatch, defaultIncrementId}) {
   if (typeof defaultIncrementId !== 'undefined' && defaultIncrementId !== null) {
-    navigateToIncrement(navigation, dispatch, defaultIncrementId)
+    const alias = increments.find(increment => increment.id === defaultIncrementId).alias
+    navigateToIncrement(navigation, dispatch, defaultIncrementId, alias)
   }
   return (
       <View style={styles.container}>
@@ -17,7 +18,7 @@ export function IncrementList ({increments, navigation, dispatch, defaultIncreme
             keyExtractor={item=>item.id}
             renderItem={({ item })=>(
               <IncrementListItem
-                onPress={()=>navigateToIncrement(navigation, dispatch, item.id)} 
+                onPress={()=>navigateToIncrement(navigation, dispatch, item.id, item.alias)} 
                 {...item}
                 navigation={navigation}
               />
@@ -44,9 +45,9 @@ const styles = StyleSheet.create({
   },
 })
 
-function navigateToIncrement(navigation, dispatch, id) {
+function navigateToIncrement(navigation, dispatch, id, alias) {
   dispatch(setCurrentIncrement(id))
-  navigation.navigate('ActivityList')
+  navigation.navigate('ActivityList', {incrementAlias: alias})
 }
 
 function mapStateToProps(state) {

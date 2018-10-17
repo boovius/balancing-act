@@ -27,7 +27,7 @@ export function ActivityListItem ({id, title, data, increment, doThisActivity, r
           type='font-awesome'
           reverse
           underlayColor='#aeaeae'
-          onPress={() => navigation.navigate('DoingsList', { activityId: id })}
+          onPress={() => navigation.navigate('DoingsList', { activityId: id, activityTitle: title })}
         />
       </TouchableOpacity>
     </View>

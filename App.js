@@ -20,9 +20,6 @@ const Stack = createStackNavigator({
   },
   ActivityList: {
     screen: ActivityList,
-    navigationOptions: {
-      title: 'Activities'
-    }
   },
   AddIncrement: {
     screen: AddIncrement
